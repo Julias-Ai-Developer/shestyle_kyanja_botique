@@ -87,7 +87,6 @@ while ($row = mysqli_fetch_assoc($recentResult)) {
                     
                     <?php if (strpos($worker['role_name'], 'Visual') !== false || strpos($worker['role_name'], 'Manager') !== false): ?>
                     <li class="nav-item"><a class="nav-link" href="images.php">Images</a></li>
-                    <li class="nav-item"><a class="nav-link" href="banners.php">Banners</a></li>
                     <?php endif; ?>
                     
                     <li class="nav-item mt-3"><a class="nav-link text-secondary" href="logout.php">Logout</a></li>
@@ -210,7 +209,7 @@ while ($row = mysqli_fetch_assoc($recentResult)) {
                                 <tr>
                                     <td>#<?php echo $order['id']; ?></td>
                                     <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
-                                    <td>$<?php echo number_format($order['total'], 2); ?></td>
+                                    <td>Ugx<?php echo number_format($order['total'], 2); ?></td>
                                     <td>
                                         <span class="badge bg-<?php echo $order['status'] === 'completed' ? 'success' : ($order['status'] === 'pending' ? 'warning' : 'info'); ?>">
                                             <?php echo ucfirst($order['status']); ?>

@@ -13,7 +13,11 @@ if (!empty($cart)) {
             continue;
         }
         
-        $query = "SELECT * FROM products WHERE id = " . intval($item['product_id']);
+        $query = "
+            SELECT p.*, pi.image_url 
+            FROM products p 
+            LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_primary = 1
+            WHERE p.id = " . intval($item['product_id']);
         $result = mysqli_query($conn, $query);
         $product = $result ? mysqli_fetch_assoc($result) : null;
         
@@ -27,8 +31,9 @@ if (!empty($cart)) {
     }
 }
 
-$shippingCost = $subtotal > 0 ? 10 : 0;
-$total = $subtotal + $shippingCost;
+// Reservation system - no shipping costs
+$reservationFee = 0; // Could add small processing fee if needed
+$total = $subtotal + $reservationFee;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,8 +78,10 @@ $total = $subtotal + $shippingCost;
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="<?php echo htmlspecialchars($item['product']['image_url'] ?? ''); ?>" 
-                                             style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px;" alt="">
+                                        <img src="<?php echo htmlspecialchars($item['product']['image_url'] ?? 'https://via.placeholder.com/60x60?text=No+Image'); ?>" 
+                                             style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px; border-radius: 4px;" 
+                                             alt="<?php echo htmlspecialchars($item['product']['name']); ?>"
+                                             onerror="this.src='https://via.placeholder.com/60x60?text=No+Image'">
                                         <div>
                                             <a href="product.php?id=<?php echo $item['product_id']; ?>" class="text-decoration-none text-dark">
                                                 <strong><?php echo htmlspecialchars($item['product']['name']); ?></strong>
@@ -105,7 +112,7 @@ $total = $subtotal + $shippingCost;
         
         <!-- Cart Summary -->
         <div class="col-lg-4">
-            <div class="card sticky-top" style="top: 20px;z-index:-1000">
+            <div class="card sticky-top" style="top: 20px;">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Order Summary</h5>
                     
@@ -114,13 +121,13 @@ $total = $subtotal + $shippingCost;
                         <span>Ugx<?php echo number_format($subtotal, 2); ?></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Shipping:</span>
-                        <span>Ugx<?php echo number_format($shippingCost, 2); ?></span>
+                        <span>Reservation Fee:</span>
+                        <span>Ugx<?php echo number_format($reservationFee, 2); ?></span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-3">
                         <strong>Total:</strong>
-                        <strong class="text-orange fs-5">$<?php echo number_format($total, 2); ?></strong>
+                        <strong class="text-orange fs-5">Ugx<?php echo number_format($total, 2); ?></strong>
                     </div>
                     
                     <a href="checkout.php" class="btn btn-primary-custom w-100 mb-2">Proceed to Checkout</a>

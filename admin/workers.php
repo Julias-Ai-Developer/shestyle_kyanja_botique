@@ -182,7 +182,6 @@ while ($row = mysqli_fetch_assoc($rolesResult)) {
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="images.php">Images</a></li>
-                    <li class="nav-item"><a class="nav-link" href="banners.php">Banners</a></li>
                     <li class="nav-item"><a class="nav-link active" href="workers.php" style="color: #FF6B35; font-weight: 600; border-left: 4px solid #FF6B35; padding-left: 12px;">Workers</a></li>
                     <li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
                     <li class="nav-item"><a class="nav-link" href="customers.php">Customers</a></li>

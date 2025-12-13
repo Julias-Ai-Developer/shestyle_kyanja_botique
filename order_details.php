@@ -120,7 +120,7 @@ while ($row = mysqli_fetch_assoc($itemsResult)) {
         <div class="col-lg-4">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">Shipping Address</h5>
+                    <h5 class=\"mb-0\">📍 Pickup Address</h5>
                 </div>
                 <div class="card-body">
                     <p class="mb-0">
@@ -142,8 +142,12 @@ while ($row = mysqli_fetch_assoc($itemsResult)) {
                         <span>Ugx<?php echo number_format($order['subtotal'], 2); ?></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Shipping:</span>
-                        <span>Ugx<?php echo number_format($order['shipping_cost'], 2); ?></span>
+                        <span>Reservation Fee:</span>
+                        <span>Ugx<?php echo number_format($order['reservation_fee'] ?? 0, 2); ?></span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2 text-info">
+                        <span>Payment Percentage:</span>
+                        <span><?php echo $order['payment_percentage'] ?? 100; ?>%</span>
                     </div>
                     <?php if ($order['discount'] > 0): ?>
                     <div class="d-flex justify-content-between mb-2 text-success">

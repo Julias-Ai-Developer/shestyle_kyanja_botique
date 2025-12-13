@@ -68,7 +68,7 @@ if ($itemsResult) {
                         </div>
                         <div class="col-md-6 mb-3">
                             <h6 class="text-muted">Total Amount</h6>
-                            <p class="text-orange fs-5">$<?php echo number_format($order['total'], 2); ?></p>
+                            <p class="text-orange fs-5">Ugx<?php echo number_format($order['total'], 2); ?></p>
                         </div>
                     </div>
                     
@@ -89,7 +89,7 @@ if ($itemsResult) {
                                 <tr>
                                     <td><?php echo htmlspecialchars($item['name']); ?></td>
                                     <td><?php echo $item['quantity']; ?></td>
-                                    <td>$<?php echo number_format($item['product_price'] ?? 0, 2); ?></td>
+                                    <td>Ugx<?php echo number_format($item['product_price'] ?? 0, 2); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -97,7 +97,7 @@ if ($itemsResult) {
                     </div>
                     
                     <div class="alert alert-info mb-4">
-                        <h6 class="mb-2">📦 Shipping Address</h6>
+                        <h6 class=\"mb-2\">📍 Pickup Details</h6>
                         <p class="mb-0">
                             <?php echo htmlspecialchars($order['customer_name']); ?><br>
                             <?php echo htmlspecialchars($order['shipping_address']); ?><br>

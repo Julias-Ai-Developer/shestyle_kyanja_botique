@@ -3,21 +3,6 @@
 $pageTitle = 'Home - Boutique Fashion Store';
 include 'includes/header.php';
 
-// Get banners for carousel
-$bannersQuery = "
-    SELECT * FROM banners 
-    WHERE is_active = 1 
-    ORDER BY display_order ASC
-    LIMIT 5
-";
-$bannersResult = mysqli_query($conn, $bannersQuery);
-$banners = [];
-if ($bannersResult) {
-    while ($row = mysqli_fetch_assoc($bannersResult)) {
-        $banners[] = $row;
-    }
-}
-
 // Get recent products in stock (ordered by creation date)
 $recentQuery = "
     SELECT p.*, pi.image_url, c.name as category_name 
@@ -85,65 +70,72 @@ if ($categoriesResult) {
     </div>
 </div>
 
-<!-- Image Carousel Hero Section -->
-<div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
-    <div class="carousel-indicators">
-        <?php foreach ($banners as $idx => $banner): ?>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?php echo $idx; ?>" 
-                <?php echo $idx === 0 ? 'class="active" aria-current="true"' : ''; ?>></button>
-        <?php endforeach; ?>
-    </div>
+<!-- Static Hero Section -->
+<div class="hero-section-static" style="background: linear-gradient(135deg, #FF6B35 0%, #D9534F 100%); min-height: 500px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+    <!-- Decorative Background Elements -->
+    <div style="position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1;"></div>
+    <div style="position: absolute; bottom: -30px; left: -30px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1;"></div>
     
-    <div class="carousel-inner">
-        <?php if (!empty($banners)): ?>
-            <?php foreach ($banners as $idx => $banner): 
-                // Check if image is local or external URL
-                $imgSrc = (strpos($banner['image'], 'http') === 0) ? $banner['image'] : $banner['image'];
-            ?>
-            <div class="carousel-item <?php echo $idx === 0 ? 'active' : ''; ?>">
-                <img src="<?php echo htmlspecialchars($imgSrc); ?>" class="d-block w-100 carousel-image" alt="<?php echo htmlspecialchars($banner['title']); ?>" style="height: 500px; object-fit: cover;">
-                <div class="carousel-caption d-none d-md-block hero-overlay">
-                    <h1 class="display-3 fw-bold mb-3"><?php echo htmlspecialchars($banner['title']); ?></h1>
-                    <?php if (!empty($banner['subtitle'])): ?>
-                    <p class="fs-4 mb-4"><?php echo htmlspecialchars($banner['subtitle']); ?></p>
-                    <?php endif; ?>
-                    <?php if (!empty($banner['link']) && !empty($banner['button_text'])): ?>
-                    <a href="<?php echo htmlspecialchars($banner['link']); ?>" class="btn btn-primary-custom btn-lg">
-                        <?php echo htmlspecialchars($banner['button_text']); ?>
+    <div class="container position-relative z-2" style="z-index: 2;">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-3 fw-bold text-white mb-4" style="animation: fadeInUp 1s ease-out;">
+                    Welcome to Our Boutique
+                </h1>
+                <p class="fs-5 text-white mb-5" style="opacity: 0.95; animation: fadeInUp 1s ease-out 0.2s backwards;">
+                    Discover the latest fashion trends and elevate your style with our exclusive collection of premium clothing and accessories.
+                </p>
+                <div class="d-flex gap-3" style="animation: fadeInUp 1s ease-out 0.4s backwards;">
+                    <a href="shop.php" class="btn btn-light btn-lg fw-bold" style="color: #FF6B35; padding: 12px 40px; border-radius: 50px;">
+                        Shop Now
                     </a>
-                    <?php else: ?>
-                    <a href="shop.php" class="btn btn-primary-custom btn-lg">Shop Now</a>
-                    <?php endif; ?>
+                    <a href="about.php" class="btn btn-outline-light btn-lg fw-bold" style="padding: 12px 40px; border-radius: 50px;">
+                        Learn More
+                    </a>
                 </div>
             </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <!-- Fallback carousel if no banners exist -->
-            <div class="carousel-item active" style="background: linear-gradient(135deg, var(--primary-orange), var(--burnt-orange)); height: 500px; display: flex; align-items: center; justify-content: center;">
-                <div class="hero-section hero-overlay text-center">
-                    <h1 class="display-3 fw-bold">Welcome to Our Boutique</h1>
-                    <p class="fs-4 mb-4">Discover the latest fashion trends</p>
-                    <a href="shop.php" class="btn btn-primary-custom btn-lg">Shop Now</a>
+            <div class="col-lg-4 d-none d-lg-block">
+                <div style="position: relative; perspective: 1000px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="text-align: center; color: white;">
+                            <div style="font-size: 80px; margin-bottom: 20px;">👗</div>
+                            <h3 class="fw-bold mb-3">Premium Collection</h3>
+                            <p style="font-size: 14px; opacity: 0.9;">Curated styles for every occasion</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        <?php endif; ?>
+        </div>
     </div>
     
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-section-static .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section-static .btn-outline-light:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+    </style>
 </div>
 
-<!-- Recent Products Slider -->
+<!-- Recent Products Auto-Sliding Carousel -->
 <?php if (!empty($recentProducts)): ?>
 <section class="container my-5">
-    <h2 class="text-center mb-5 text-orange fw-bold">🆕 Latest Arrivals</h2>
-    
     <div class="position-relative">
         <div class="carousel-container">
             <div class="carousel-slider" id="productsSlider">
@@ -170,11 +162,11 @@ if ($categoriesResult) {
                             <p class="text-muted small"><?php echo htmlspecialchars($product['category_name']); ?></p>
                             <div class="mb-3">
                                 <span class="fs-5 fw-bold text-orange">
-                                    $<?php echo number_format($product['discount_price'] ?: $product['price'], 2); ?>
+                                    Ugx<?php echo number_format($product['discount_price'] ?: $product['price'], 2); ?>
                                 </span>
                                 <?php if ($product['discount_price']): ?>
                                 <span class="text-muted text-decoration-line-through small ms-2">
-                                    $<?php echo number_format($product['price'], 2); ?>
+                                    Ugx<?php echo number_format($product['price'], 2); ?>
                                 </span>
                                 <?php endif; ?>
                             </div>
@@ -187,9 +179,6 @@ if ($categoriesResult) {
                 <?php endforeach; ?>
             </div>
         </div>
-        
-        <button class="carousel-control prev" onclick="scrollSlider(-1)">❮</button>
-        <button class="carousel-control next" onclick="scrollSlider(1)">❯</button>
     </div>
 </section>
 <?php endif; ?>
@@ -254,27 +243,35 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.show();
         localStorage.setItem('promoShown', 'true');
     }
+    
+    // Auto-scroll carousel every 5 seconds
+    const slider = document.getElementById('productsSlider');
+    if (slider) {
+        setInterval(() => {
+            autoScrollSlider();
+        }, 5000);
+    }
 });
 
-// Carousel slider functionality
+// Auto-scroll carousel
 let currentSlide = 0;
 
-function scrollSlider(direction) {
+function autoScrollSlider() {
     const slider = document.getElementById('productsSlider');
+    if (!slider) return;
+    
     const items = document.querySelectorAll('.carousel-item');
     const itemWidth = 280; // Width of carousel item + gap
     
-    currentSlide += direction;
+    currentSlide++;
     
     // Wrap around
-    if (currentSlide < 0) {
-        currentSlide = items.length - 4;
-    }
     if (currentSlide > items.length - 4) {
         currentSlide = 0;
     }
     
     slider.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
+    slider.style.transition = 'transform 0.5s ease-in-out';
 }
 
 function addToCart(productId) {

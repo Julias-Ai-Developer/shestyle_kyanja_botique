@@ -32,8 +32,9 @@ foreach ($cart as $item) {
     }
 }
 
-$shippingCost = 10;
-$total = $subtotal + $shippingCost;
+// Reservation system - no shipping costs
+$reservationFee = 0; // Could add small processing fee if needed
+$total = $subtotal + $reservationFee;
 
 $error = '';
 $success = '';
@@ -73,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $orderQuery = "
                 INSERT INTO orders (
                     user_id, order_number, customer_name, customer_email, customer_phone,
-                    shipping_address, city, postal_code, subtotal, shipping_cost, total,
+                    shipping_address, city, postal_code, subtotal, reservation_fee, payment_percentage, total,
                     payment_method, status
                 ) VALUES (
                     " . ($userId ? $userId : "NULL") . ",
@@ -85,7 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     '$city',
                     '$postalCode',
                     $subtotal,
-                    $shippingCost,
+                    $reservationFee,
+                    " . (int)$_POST['payment_percentage'] . ",
                     $total,
                     '$paymentMethod',
                     'pending'
@@ -161,8 +163,8 @@ $csrfToken = generateCSRFToken();
                 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                 
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="mb-0">Shipping Information</h5>
+                    <div class="card-header bg-orange text-white">
+                        <h5 class="mb-0">📋 Pickup Information</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -205,23 +207,84 @@ $csrfToken = generateCSRFToken();
                 </div>
                 
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="mb-0">Payment Method</h5>
+                    <div class="card-header bg-orange text-white">
+                        <h5 class="mb-0">💳 Payment Method</h5>
                     </div>
                     <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" checked required>
-                            <label class="form-check-label" for="credit_card">Credit Card</label>
+                        <p class="text-muted mb-3">Choose your preferred mobile money payment method:</p>
+                        
+                        <div class="form-check mb-3 p-3 border rounded" style="background: rgba(255, 107, 53, 0.05);">
+                            <input class="form-check-input" type="radio" name="payment_method" id="airtel_money" value="airtel_money" checked required>
+                            <label class="form-check-label" for="airtel_money" style="cursor: pointer;">
+                                <strong>📱 Airtel Money</strong>
+                                <br>
+                                <small class="text-muted">Fast and secure mobile money payment</small>
+                            </label>
                         </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="payment_method" id="debit_card" value="debit_card" required>
-                            <label class="form-check-label" for="debit_card">Debit Card</label>
+                        
+                        <div class="form-check mb-3 p-3 border rounded" style="background: rgba(255, 179, 102, 0.05);">
+                            <input class="form-check-input" type="radio" name="payment_method" id="mtn_money" value="mtn_money" required>
+                            <label class="form-check-label" for="mtn_money" style="cursor: pointer;">
+                                <strong>📱 MTN Mobile Money</strong>
+                                <br>
+                                <small class="text-muted">Convenient payment via MTN MoMo</small>
+                            </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="paypal" required>
-                            <label class="form-check-label" for="paypal">PayPal</label>
+                        
+                        <div class="alert alert-info mt-3">
+                            <small>
+                                <strong>How it works:</strong> After placing your order, you will receive a payment prompt on your phone. 
+                                Enter your PIN to complete the payment. Your order will be confirmed once payment is received.
+                            </small>
                         </div>
                     </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-orange text-white">
+                        <h5 class="mb-0">💰 Payment Amount</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-3">Choose how much to pay now:</p>
+                        
+                        <div class="form-check mb-3 p-3 border rounded" style="background: rgba(255, 107, 53, 0.05);">
+                            <input class="form-check-input payment-percentage" type="radio" name="payment_percentage" id="pay_50" value="50" required onchange="updatePaymentAmount()">
+                            <label class="form-check-label" for="pay_50" style="cursor: pointer; width: 100%;">
+                                <strong>Pay 50% Now</strong>
+                                <br>
+                                <small class="text-muted">Pay remaining 50% when picking up</small>
+                                <br>
+                                <small id="amount_50" class="text-orange fw-bold">Ugx0.00</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-3 p-3 border rounded" style="background: rgba(255, 179, 102, 0.05);">
+                            <input class="form-check-input payment-percentage" type="radio" name="payment_percentage" id="pay_70" value="70" required onchange="updatePaymentAmount()">
+                            <label class="form-check-label" for="pay_70" style="cursor: pointer; width: 100%;">
+                                <strong>Pay 70% Now</strong>
+                                <br>
+                                <small class="text-muted">Pay remaining 30% when picking up</small>
+                                <br>
+                                <small id="amount_70" class="text-orange fw-bold">Ugx0.00</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-3 p-3 border rounded" style="background: rgba(100, 200, 100, 0.05);">
+                            <input class="form-check-input payment-percentage" type="radio" name="payment_percentage" id="pay_100" value="100" checked required onchange="updatePaymentAmount()">
+                            <label class="form-check-label" for="pay_100" style="cursor: pointer; width: 100%;">
+                                <strong>Pay 100% Now</strong>
+                                <br>
+                                <small class="text-muted">Full payment upfront</small>
+                                <br>
+                                <small id="amount_100" class="text-orange fw-bold">Ugx0.00</small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-success">
+                    <strong>Amount to Pay Now:</strong>
+                    <h5 class="mb-0" id="display_amount">Ugx0.00</h5>
                 </div>
                 
                 <button type="submit" class="btn btn-primary-custom btn-lg w-100">Place Order</button>
@@ -253,14 +316,23 @@ $csrfToken = generateCSRFToken();
                         <span>Subtotal:</span>
                         <span>Ugx<?php echo number_format($subtotal, 2); ?></span>
                     </div>
+                    <hr>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Shipping:</span>
-                        <span>Ugx<?php echo number_format($shippingCost, 2); ?></span>
+                        <span>Total Reservation Amount:</span>
+                        <span class="text-orange fw-bold">Ugx<?php echo number_format($total, 2); ?></span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2 p-2 bg-light rounded">
+                        <span>Payment Percentage:</span>
+                        <span id="percentageDisplay" class="fw-bold">100%</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2 p-2 bg-warning bg-opacity-10 rounded">
+                        <strong>Amount to Pay Now:</strong>
+                        <strong class="text-orange fs-5" id="amountDisplay">Ugx<?php echo number_format($total, 2); ?></strong>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
                         <strong>Total:</strong>
-                        <strong class="text-orange fs-5">$<?php echo number_format($total, 2); ?></strong>
+                        <strong class="text-orange fs-5">Ugx<?php echo number_format($total, 2); ?></strong>
                     </div>
                 </div>
             </div>
@@ -271,5 +343,32 @@ $csrfToken = generateCSRFToken();
 <?php include 'includes/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const totalAmount = <?php echo $total; ?>;
+    
+    function updatePaymentAmount() {
+        const percentage = document.querySelector('input[name="payment_percentage"]:checked').value;
+        const amountToPay = (totalAmount * percentage) / 100;
+        
+        // Update display amounts in payment options
+        document.getElementById('amount_50').textContent = 'Ugx' + (totalAmount * 0.5).toLocaleString('en-UG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('amount_70').textContent = 'Ugx' + (totalAmount * 0.7).toLocaleString('en-UG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('amount_100').textContent = 'Ugx' + totalAmount.toLocaleString('en-UG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        // Update summary section
+        document.getElementById('percentageDisplay').textContent = percentage + '%';
+        document.getElementById('amountDisplay').textContent = 'Ugx' + amountToPay.toLocaleString('en-UG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        // Update main display (if exists)
+        if (document.getElementById('display_amount')) {
+            document.getElementById('display_amount').textContent = 'Ugx' + amountToPay.toLocaleString('en-UG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+    }
+    
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        updatePaymentAmount();
+    });
+</script>
 </body>
 </html>

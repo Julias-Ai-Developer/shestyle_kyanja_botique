@@ -71,7 +71,6 @@ $totalPages = ceil($total / $perPage);
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="images.php">Images</a></li>
-                    <li class="nav-item"><a class="nav-link" href="banners.php">Banners</a></li>
                     <li class="nav-item"><a class="nav-link" href="workers.php">Workers</a></li>
                     <li class="nav-item"><a class="nav-link active" href="orders.php" style="color: #FF6B35; font-weight: 600; border-left: 4px solid #FF6B35; padding-left: 12px;">Orders</a></li>
                     <li class="nav-item"><a class="nav-link" href="customers.php">Customers</a></li>
@@ -87,8 +86,8 @@ $totalPages = ceil($total / $perPage);
                     <option value="">All Statuses</option>
                     <option value="pending">Pending</option>
                     <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
+                    <option value="reserved">Reserved</option>
+                    <option value="picked_up">Picked Up</option>
                     <option value="cancelled">Cancelled</option>
                 </select>
             </div>
@@ -113,8 +112,8 @@ $totalPages = ceil($total / $perPage);
                             <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
                             <td>Ugx<?php echo number_format($order['total'], 2); ?></td>
                             <td>
-                                <span class="badge bg-<?php echo $order['status'] === 'delivered' ? 'success' : ($order['status'] === 'cancelled' ? 'danger' : 'warning'); ?>">
-                                    <?php echo ucfirst($order['status']); ?>
+                                <span class="badge bg-<?php echo $order['status'] === 'picked_up' ? 'success' : ($order['status'] === 'cancelled' ? 'danger' : 'warning'); ?>">
+                                    <?php echo $order['status'] === 'pending' ? 'Awaiting Payment' : ($order['status'] === 'reserved' ? 'Reserved' : ($order['status'] === 'picked_up' ? 'Picked Up' : ucfirst($order['status']))); ?>
                                 </span>
                             </td>
                             <td><?php echo htmlspecialchars($order['payment_method']); ?></td>

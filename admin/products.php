@@ -84,7 +84,6 @@ while ($row = mysqli_fetch_assoc($categoriesResult)) {
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link active" href="products.php" style="color: #FF6B35; font-weight: 600; border-left: 4px solid #FF6B35; padding-left: 12px;">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="images.php">Images</a></li>
-                    <li class="nav-item"><a class="nav-link" href="banners.php">Banners</a></li>
                     <li class="nav-item"><a class="nav-link" href="workers.php">Workers</a></li>
                     <li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
                     <li class="nav-item"><a class="nav-link" href="customers.php">Customers</a></li>
@@ -118,7 +117,7 @@ while ($row = mysqli_fetch_assoc($categoriesResult)) {
                             <td><?php echo $product['id']; ?></td>
                             <td><?php echo htmlspecialchars($product['name']); ?></td>
                             <td><?php echo htmlspecialchars($product['category_name'] ?? 'N/A'); ?></td>
-                            <td>$<?php echo number_format($product['price'], 2); ?></td>
+                            <td>Ugx<?php echo number_format($product['price'], 2); ?></td>
                             <td>
                                 <span class="badge bg-<?php echo $product['stock_quantity'] > 10 ? 'success' : ($product['stock_quantity'] > 0 ? 'warning' : 'danger'); ?>">
                                     <?php echo $product['stock_quantity']; ?>

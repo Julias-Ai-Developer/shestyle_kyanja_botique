@@ -207,7 +207,6 @@ while ($row = mysqli_fetch_assoc($productsResult)) {
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
                     <li class="nav-item"><a class="nav-link active" href="images.php" style="color: #FF6B35; font-weight: 600; border-left: 4px solid #FF6B35; padding-left: 12px;">Images</a></li>
-                    <li class="nav-item"><a class="nav-link" href="banners.php">Banners</a></li>
                     <li class="nav-item"><a class="nav-link" href="workers.php">Workers</a></li>
                     <li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
                     <li class="nav-item"><a class="nav-link" href="customers.php">Customers</a></li>
@@ -374,49 +373,16 @@ while ($row = mysqli_fetch_assoc($productsResult)) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 // File input display name
-document.getElementById('image_file').addEventListener('change', function() {
-    const fileName = this.files[0]?.name || 'No file selected';
-    const wrapper = this.parentElement;
-    const label = wrapper.querySelector('.file-upload-label');
-    label.textContent = '✅ ' + fileName;
-});
-
-// Drag and drop
-const wrapper = document.querySelector('.file-upload-wrapper');
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    wrapper.addEventListener(eventName, preventDefaults, false);
-});
-
-function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
-}
-
-['dragenter', 'dragover'].forEach(eventName => {
-    wrapper.addEventListener(eventName, () => {
-        wrapper.style.backgroundColor = '#ffe8d8';
-    }, false);
-});
-
-['dragleave', 'drop'].forEach(eventName => {
-    wrapper.addEventListener(eventName, () => {
-        wrapper.style.backgroundColor = '#fff8f0';
-    }, false);
-});
-
-wrapper.addEventListener('drop', (e) => {
-    const dt = e.dataTransfer;
-    const files = dt.files;
-    document.getElementById('image_file').files = files;
-    // Trigger change event
-    document.getElementById('image_file').dispatchEvent(new Event('change', { bubbles: true }));
-}, false);
-
-function deleteImage(imageId) {
-    if (confirm('Are you sure you want to delete this image? This action cannot be undone.')) {
-        // Implement delete functionality
-        alert('Delete functionality to be implemented in the next update');
-    }
+const fileInput = document.getElementById('image_file');
+if (fileInput) {
+    fileInput.addEventListener('change', function() {
+        const fileName = this.files[0]?.name || 'No file selected';
+        const wrapper = this.parentElement;
+        const label = wrapper.querySelector('.file-upload-label');
+        if (label) {
+            label.textContent = '✅ ' + fileName;
+        }
+    });
 }
 </script>
 </body>

@@ -426,42 +426,17 @@ $totalPages = ceil($total / $perPage);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 // File input display name
-document.getElementById('banner_image').addEventListener('change', function() {
-    const fileName = this.files[0]?.name || 'No file selected';
-    const wrapper = this.parentElement;
-    const label = wrapper.querySelector('.file-upload-label');
-    label.textContent = '✅ ' + fileName;
-});
-
-// Drag and drop
-const wrapper = document.querySelector('.file-upload-wrapper');
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    wrapper.addEventListener(eventName, preventDefaults, false);
-});
-
-function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
+const fileInput = document.getElementById('banner_image');
+if (fileInput) {
+    fileInput.addEventListener('change', function() {
+        const fileName = this.files[0]?.name || 'No file selected';
+        const wrapper = this.parentElement;
+        const label = wrapper.querySelector('.file-upload-label');
+        if (label) {
+            label.textContent = '✅ ' + fileName;
+        }
+    });
 }
-
-['dragenter', 'dragover'].forEach(eventName => {
-    wrapper.addEventListener(eventName, () => {
-        wrapper.style.backgroundColor = '#ffe8d8';
-    }, false);
-});
-
-['dragleave', 'drop'].forEach(eventName => {
-    wrapper.addEventListener(eventName, () => {
-        wrapper.style.backgroundColor = '#fff8f0';
-    }, false);
-});
-
-wrapper.addEventListener('drop', (e) => {
-    const dt = e.dataTransfer;
-    const files = dt.files;
-    document.getElementById('banner_image').files = files;
-    document.getElementById('banner_image').dispatchEvent(new Event('change', { bubbles: true }));
-}, false);
 </script>
 </body>
 </html>

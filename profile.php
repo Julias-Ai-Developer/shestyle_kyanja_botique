@@ -174,10 +174,10 @@ while ($row = mysqli_fetch_assoc($ordersResult)) {
                             <tr>
                                 <td><a href="order_details.php?id=<?php echo $order['id']; ?>" class="text-orange"><?php echo htmlspecialchars($order['order_number']); ?></a></td>
                                 <td><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
-                                <td>$<?php echo number_format($order['total'], 2); ?></td>
+                                <td>Ugx<?php echo number_format($order['total'], 2); ?></td>
                                 <td>
-                                    <span class="badge bg-<?php echo $order['status'] === 'delivered' ? 'success' : ($order['status'] === 'cancelled' ? 'danger' : 'warning'); ?>">
-                                        <?php echo ucfirst($order['status']); ?>
+                                    <span class="badge bg-<?php echo $order['status'] === 'picked_up' ? 'success' : ($order['status'] === 'cancelled' ? 'danger' : 'warning'); ?>">
+                                        <?php echo $order['status'] === 'pending' ? 'Awaiting Payment' : ($order['status'] === 'reserved' ? 'Reserved' : ($order['status'] === 'picked_up' ? 'Picked Up' : ucfirst($order['status']))); ?>
                                     </span>
                                 </td>
                                 <td>

@@ -195,7 +195,7 @@ while ($row = mysqli_fetch_assoc($relatedResult)) {
                     <img src="<?php echo htmlspecialchars($related['image_url'] ?? ''); ?>" class="card-img-top" alt="">
                     <div class="card-body">
                         <h6><?php echo htmlspecialchars($related['name']); ?></h6>
-                        <span class="text-orange">$<?php echo number_format($related['discount_price'] ?? $related['price'], 2); ?></span>
+                        <span class="text-orange">Ugx<?php echo number_format($related['discount_price'] ?? $related['price'], 2); ?></span>
                     </div>
                 </a>
             </div>

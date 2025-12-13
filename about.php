@@ -56,8 +56,8 @@ require_once 'config/database.php';
         <div class="col-md-4">
             <div class="card h-100 text-center">
                 <div class="card-body">
-                    <h3 class="text-orange mb-3">🚚 Fast Shipping</h3>
-                    <p>Quick and reliable delivery to your doorstep</p>
+                    <h3 class="text-orange mb-3">📋 Easy Reservation</h3>
+                    <p>Reserve items with flexible payment options - pay 50%, 70%, or 100% upfront</p>
                 </div>
             </div>
         </div>

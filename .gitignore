@@ -1,0 +1,16 @@
+# PHP / Composer
+vendor/
+.env
+
+# Node (if used)
+node_modules/
+
+# Logs / cache
+*.log
+cache/
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+

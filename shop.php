@@ -87,7 +87,7 @@ while ($row = mysqli_fetch_assoc($categoriesResult)) {
             <form method="GET" class="mb-4">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Search products..." value="<?php echo htmlspecialchars($search); ?>">
-                    <button class="btn btn-primary-custom" type="submit">Search</button>
+                    <button class="btn btn-primary-custom" type="submit" style="padding: 0.75rem 1.5rem;">🔍</button>
                 </div>
             </form>
         </div>

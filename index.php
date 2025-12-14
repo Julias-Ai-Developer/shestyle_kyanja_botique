@@ -70,68 +70,282 @@ if ($categoriesResult) {
     </div>
 </div>
 
-<!-- Static Hero Section -->
-<div class="hero-section-static" style="background: linear-gradient(135deg, #FF6B35 0%, #D9534F 100%); min-height: 500px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-    <!-- Decorative Background Elements -->
-    <div style="position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1;"></div>
-    <div style="position: absolute; bottom: -30px; left: -30px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1;"></div>
-    
-    <div class="container position-relative z-2" style="z-index: 2;">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-3 fw-bold text-white mb-4" style="animation: fadeInUp 1s ease-out;">
-                    Welcome to Our Boutique
-                </h1>
-                <p class="fs-5 text-white mb-5" style="opacity: 0.95; animation: fadeInUp 1s ease-out 0.2s backwards;">
-                    Discover the latest fashion trends and elevate your style with our exclusive collection of premium clothing and accessories.
-                </p>
-                <div class="d-flex gap-3" style="animation: fadeInUp 1s ease-out 0.4s backwards;">
-                    <a href="shop.php" class="btn btn-light btn-lg fw-bold" style="color: #FF6B35; padding: 12px 40px; border-radius: 50px;">
-                        Shop Now
-                    </a>
-                    <a href="about.php" class="btn btn-outline-light btn-lg fw-bold" style="padding: 12px 40px; border-radius: 50px;">
-                        Learn More
-                    </a>
+<!-- Hero Carousel Section -->
+<section class="hero-carousel-wrapper">
+    <div class="hero-carousel-container" id="heroCarousel">
+        <div class="hero-slide" style="background-image: url('assets/images/Vintage shirts.jpg');">
+            <div class="hero-banner-overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="hero-content">
+                                <h1 class="hero-title">Welcome to SheStyle Boutique</h1>
+                                <p class="hero-description">
+                                    Discover premium fashion clothing and accessories that elevate your style. 
+                                    Our curated collection features the latest trends in women's fashion, 
+                                    designed to make you look and feel confident.
+                                </p>
+                                <a href="shop.php" class="btn-hero-cta">View Products</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4 d-none d-lg-block">
-                <div style="position: relative; perspective: 1000px;">
-                    <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-                        <div style="text-align: center; color: white;">
-                            <div style="font-size: 80px; margin-bottom: 20px;">👗</div>
-                            <h3 class="fw-bold mb-3">Premium Collection</h3>
-                            <p style="font-size: 14px; opacity: 0.9;">Curated styles for every occasion</p>
+        </div>
+        <div class="hero-slide" style="background-image: url('assets/images/download (2).jpg');">
+            <div class="hero-banner-overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="hero-content">
+                                <h1 class="hero-title">Welcome to SheStyle Boutique</h1>
+                                <p class="hero-description">
+                                    Discover premium fashion clothing and accessories that elevate your style. 
+                                    Our curated collection features the latest trends in women's fashion, 
+                                    designed to make you look and feel confident.
+                                </p>
+                                <a href="shop.php" class="btn-hero-cta">View Products</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('assets/images/download (5).jpg');">
+            <div class="hero-banner-overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="hero-content">
+                                <h1 class="hero-title">Welcome to SheStyle Boutique</h1>
+                                <p class="hero-description">
+                                    Discover premium fashion clothing and accessories that elevate your style. 
+                                    Our curated collection features the latest trends in women's fashion, 
+                                    designed to make you look and feel confident.
+                                </p>
+                                <a href="shop.php" class="btn-hero-cta">View Products</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('assets/images/Unisex vintage shirts 😍 check us out on 📌IG_ glennysvintagewears.jpg');">
+            <div class="hero-banner-overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="hero-content">
+                                <h1 class="hero-title">Welcome to SheStyle Boutique</h1>
+                                <p class="hero-description">
+                                    Discover premium fashion clothing and accessories that elevate your style. 
+                                    Our curated collection features the latest trends in women's fashion, 
+                                    designed to make you look and feel confident.
+                                </p>
+                                <a href="shop.php" class="btn-hero-cta">View Products</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero-section-static .btn-light:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .hero-section-static .btn-outline-light:hover {
-            transform: translateY(-2px);
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-    </style>
+</section>
+
+<!-- Floating WhatsApp Button -->
+<div class="whatsapp-float-container">
+    <a href="https://wa.me/256700000000" target="_blank" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+        <span class="whatsapp-text">Need Help?</span>
+        <div class="whatsapp-icon-wrapper">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-badge">1</span>
+        </div>
+    </a>
 </div>
+
+<style>
+.hero-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-carousel-container {
+    display: flex;
+    transition: transform 1s ease-in-out;
+}
+
+.hero-slide {
+    min-width: 100%;
+    min-height: 500px;
+    background-size: 50% 100%;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-color: #228B22;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, #228B22 0%, #228B22 30%, rgba(34, 139, 34, 0.8) 45%, rgba(34, 139, 34, 0.4) 60%, rgba(34, 139, 34, 0.1) 75%, transparent 90%);
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 0;
+}
+
+.hero-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 500px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.btn-hero-cta {
+    display: inline-block;
+    background: white;
+    color: var(--primary-orange);
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    color: var(--burnt-orange);
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.whatsapp-float {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.whatsapp-text {
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.whatsapp-icon-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.whatsapp-icon-wrapper i {
+    color: white;
+    font-size: 28px;
+}
+
+.whatsapp-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 2px solid white;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-float:hover .whatsapp-icon-wrapper {
+    background-color: #128C7E;
+}
+
+@keyframes pulse-whatsapp {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(37, 211, 102, 0.4);
+    }
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .whatsapp-float {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    .whatsapp-text {
+        font-size: 0.85rem;
+    }
+    
+    .whatsapp-icon-wrapper {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .whatsapp-icon-wrapper i {
+        font-size: 24px;
+    }
+}
+</style>
+
 
 <!-- Recent Products Auto-Sliding Carousel -->
 <?php if (!empty($recentProducts)): ?>
@@ -250,6 +464,32 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(() => {
             autoScrollSlider();
         }, 5000);
+    }
+    
+    // Hero Carousel Auto-Slide (Bouncing Back and Forth)
+    const heroCarousel = document.getElementById('heroCarousel');
+    if (heroCarousel) {
+        let currentHeroSlide = 0;
+        let direction = 1; // 1 for forward, -1 for backward
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const totalHeroSlides = heroSlides.length;
+        
+        function slideHeroCarousel() {
+            currentHeroSlide += direction;
+            
+            // Reverse direction at the ends
+            if (currentHeroSlide >= totalHeroSlides - 1) {
+                direction = -1;
+            } else if (currentHeroSlide <= 0) {
+                direction = 1;
+            }
+            
+            const offset = -currentHeroSlide * 100;
+            heroCarousel.style.transform = `translateX(${offset}%)`;
+        }
+        
+        // Auto-slide every 5 seconds
+        setInterval(slideHeroCarousel, 5000);
     }
 });
 

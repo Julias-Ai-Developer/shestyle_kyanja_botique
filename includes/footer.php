@@ -40,12 +40,11 @@
         <hr class="bg-secondary">
         
         <div class="row">
-            <div class="col-md-6">
-                <p class="text-muted">&copy; <?php echo date('Y');?> Boutique Fashion Store. All rights reserved.</p>
+            <div class="col-md-12">
+                <p class="text-muted">&copy; <?php echo date('Y');?> Boutique Fashion Store. All rights reserved.  |     <a href="https://juliasmuyambi.netlify.app/" target="_blank">Developed by <span style="color: #FF6B35; font-weight: 600;">Kamatrust AI</span></a></p>
             </div>
-            <div class="col-md-6 text-md-end">
-                <p class="text-muted">Payment Methods: Cash | Credit Card | Debit Card</p>
-            </div>
+            <!-- <div class="col-md-6 text-md-end">
+            </div> -->
         </div>
     </div>
 </footer>

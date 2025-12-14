@@ -293,7 +293,7 @@ $csrfToken = generateCSRFToken();
         
         <!-- Order Summary -->
         <div class="col-lg-4">
-            <div class="card sticky-top" style="top: 20px;">
+            <div class="card sticky-top" style="top: 20px; z-index: 1000;">
                 <div class="card-header">
                     <h5 class="mb-0">Order Summary</h5>
                 </div>

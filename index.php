@@ -154,11 +154,11 @@ if ($categoriesResult) {
 
 <!-- Floating WhatsApp Button -->
 <div class="whatsapp-float-container">
-    <a href="https://wa.me/256700000000" target="_blank" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+        <a href="https://wa.me/256777043887?text=**[Hello, I need to know more about your products]**" target="_blank" class="whatsapp-float" aria-label="Contact us on WhatsApp">
         <span class="whatsapp-text">Need Help?</span>
         <div class="whatsapp-icon-wrapper">
             <i class="fab fa-whatsapp"></i>
-            <span class="whatsapp-badge">1</span>
+            <span class="whatsapp-badge">10</span>
         </div>
     </a>
 </div>
@@ -384,7 +384,7 @@ if ($categoriesResult) {
                                 </span>
                                 <?php endif; ?>
                             </div>
-                            <button class="btn btn-add-cart btn-sm w-100" onclick="addToCart(<?php echo $product['id']; ?>)">
+                            <button class="btn btn-add-cart btn-sm w-100" onclick="addToCart(<?php echo $product['id']; ?>)" style="background-color: #228B22; color: white;">
                                 Add to Cart
                             </button>
                         </div>
@@ -437,7 +437,7 @@ if ($categoriesResult) {
                         </span>
                         <?php endif; ?>
                     </div>
-                    <button class="btn btn-add-cart" onclick="addToCart(<?php echo $product['id']; ?>)">
+                    <button class="btn btn-add-cart" onclick="addToCart(<?php echo $product['id']; ?>)" style="background-color: #228B22; color: white;">
                         Add to Cart
                     </button>
                 </div>
